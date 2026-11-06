@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@layer utilities {
+  @keyframes floatAnim {
+    0% { transform: translateY(0px) rotate(0deg); }
+    100% { transform: translateY(-16px) rotate(8deg); }
+  }
+
+  @keyframes bounceMascot {
+    0% { transform: scale(1) translateY(0); }
+    100% { transform: scale(1.15) translateY(-6px); }
+  }
+
+  @keyframes keyPulseAnim {
+    0% { transform: translateY(0) scale(1); box-shadow: 0 0 14px #FF4081; }
+    50% { transform: translateY(-6px) scale(1.03); box-shadow: 0 0 28px #FFD700; }
+    100% { transform: translateY(0) scale(1); box-shadow: 0 0 14px #FF4081; }
+  }
+
+  @keyframes chestWiggle {
+    0% { transform: rotate(-7deg) scale(1); }
+    100% { transform: rotate(7deg) scale(1.1); }
+  }
+
+  @keyframes popInAnim {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* 3D Bubble sway & color shift */
+  @keyframes bubbleSway {
+    0% { transform: translateX(0px) rotate(0deg) scale(0.96); }
+    25% { transform: translateX(-6px) rotate(-4deg) scale(1.04); }
+    50% { transform: translateX(0px) rotate(0deg) scale(0.98); }
+    75% { transform: translateX(6px) rotate(4deg) scale(1.03); }
+    100% { transform: translateX(0px) rotate(0deg) scale(0.96); }
+  }
+
+  @keyframes bubbleColorShift {
+    0% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(45deg); }
+    100% { filter: hue-rotate(0deg); }
+  }
+
+  @keyframes bubbleDropSmooth {
+    0% { top: -45px; opacity: 0; }
+    10% { opacity: 0.95; }
+    90% { opacity: 0.95; }
+    100% { top: calc(100% - 40px); opacity: 0; }
+  }
+
+  @keyframes popBurstAnim {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.8; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+
+  .animate-float-slow {
+    animation: floatAnim 5s ease-in-out infinite alternate;
+  }
+
+  .animate-bounce-mascot {
+    animation: bounceMascot 1.2s infinite alternate ease-in-out;
+  }
+
+  .animate-key-pulse {
+    animation: keyPulseAnim 1.2s infinite ease-in-out;
+  }
+
+  .animate-chest-wiggle {
+    animation: chestWiggle 0.9s infinite alternate ease-in-out;
+  }
+
+  .animate-pop-in {
+    animation: popInAnim 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .animate-bubble-drop-smooth {
+    animation: bubbleDropSmooth 3.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+
+  .animate-bubble-sway {
+    animation: bubbleSway 2.4s ease-in-out infinite, bubbleColorShift 4s ease-in-out infinite;
+  }
+
+  .animate-bubble-burst {
+    animation: popBurstAnim 0.25s ease-out forwards;
+  }
+}
+
+/* 3D Soap Bubble Visual Shader */
+.bubble-3d-sphere {
+  background: radial-gradient(
+    circle at 35% 30%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.3) 25%,
+    rgba(255, 105, 180, 0.35) 55%,
+    rgba(0, 229, 255, 0.35) 75%,
+    rgba(255, 215, 0, 0.45) 92%,
+    rgba(255, 64, 129, 0.6) 100%
+  );
+  box-shadow:
+    inset -3px -3px 8px rgba(255, 64, 129, 0.4),
+    inset 3px 3px 8px rgba(255, 255, 255, 0.9),
+    0 4px 14px rgba(255, 64, 129, 0.25);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* Secondary highlight dot on bubble */
+.bubble-3d-sphere::before {
+  content: '';
+  position: absolute;
+  top: 14%;
+  left: 20%;
+  width: 28%;
+  height: 24%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 80%);
+  transform: rotate(-35deg);
+  pointer-events: none;
+}
+
+/* Bottom specular rim shine */
+.bubble-3d-sphere::after {
+  content: '';
+  position: absolute;
+  bottom: 12%;
+  right: 18%;
+  width: 22%;
+  height: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 80%);
+  pointer-events: none;
+}
